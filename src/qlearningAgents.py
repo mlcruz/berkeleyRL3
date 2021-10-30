@@ -101,14 +101,14 @@ class QLearningAgent(ReinforcementAgent):
         """
         # Pick Action
         legalActions = self.getLegalActions(state)
-        action = None
         if len(legalActions) == 0:
             return None
 
+        # random action depending on epsilon
         if util.flipCoin(self.epsilon):
-            action = random.choice(legalActions)
+            return random.choice(legalActions)
 
-        return action
+        return self.computeActionFromQValues(state)
 
     def update(self, state, action, nextState, reward):
         """
